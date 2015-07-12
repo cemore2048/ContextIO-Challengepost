@@ -25,10 +25,10 @@ http.createServer(function(request, response) {
 		
     console.log("getting responses...");
     var messages = response.body;
-    console.log(messages.length);
+    console.log(messages.date);
 
     console.log("message id is " );
-    console.log(messages.message_id);
+    console.log(messages[0].date);
 
 
 
