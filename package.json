@@ -1,0 +1,25 @@
+{
+  "name": "ContextIO",
+  "version": "1.0.0",
+  "description": "Email Analytics",
+  "main": "server.js",
+  "dependencies": {
+    "contextio": "^0.5.0",
+    "express": "^4.13.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ralphie9224/ContextIO-Challengepost.git"
+  },
+  "author": "Rafa Moreno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ralphie9224/ContextIO-Challengepost/issues"
+  },
+  "homepage": "https://github.com/ralphie9224/ContextIO-Challengepost"
+}

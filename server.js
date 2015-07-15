@@ -6,7 +6,7 @@ var ID = "559acaf250eeb4b6208b4569";
 
 http.createServer(function(request, response) {
   response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("Hello World");
+  response.write();
   response.end();
 }).listen(8888);
 
@@ -20,35 +20,30 @@ http.createServer(function(request, response) {
 
 
   var emailArray = {};
-  ctxioClient.accounts(ID).messages().get({limit:10}, function ( err, response) {
-  	if(err) throw err;
-		
+
+  ctxioClient.accounts(ID).contacts().get({limit:250, sort_by: "count", sort_order: "desc"}, function ( err, response) {
+    if(err) throw err;
+    
     console.log("getting responses...");
-    var messages = response.body;
-    console.log(messages.date);
+    var contacts = response.body;
+    var matches = contacts.matches;
 
-    console.log("message id is " );
-    console.log(messages[0].date);
+    console.log("getting queries");
+    console.log(contacts.query);
 
+    console.log("Matches email");
+    for (var i = 0; i < matches.length; i++){
+      console.log(matches[i].email);
+      console.log(matches[i].name)
+      console.log("Sent to : " + matches[i].sent_count.toString());
+      console.log("Sent received : " + matches[i].received_count.toString());
 
-
-
-
-
-    // for(var i = 0; i < messages.length; i++){
-    //   emailArray[i] = messages.message_id;
-    //   console.log("body message is ");
-
-        
-    // }
-
+    }
     
 
-    for(var j = 0; j < emailArray.length; i++){
-        console.log("emails are " + emailArray[i]);
-    }
+
+
+
   	
-
-
   });
 
