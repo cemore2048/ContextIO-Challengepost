@@ -22,31 +22,49 @@ var port = process.env.PORT || 8888;
     key: "77dlwft1",
     secret: "C43lwCkZjM12MMiF"
   });
+//helper functions
 
-router.get('/messages', function(request, response) {
+var timeFormat = function(time){
+  var date = new Date(time*1000);
+  var day = date.getDate();
+  var month = date.getMonth();
+  var year = date.getFullYear();
 
-  var names = [];
-  ctxioClient.accounts(ID).contacts().get({limit:250, sort_by: "count", sort_order: "desc"}, 
+  return month + "/" + day + "/" + year;
+
+}
+
+router.get('/messages',  function(request, res) {
+
+  var dateArray = [];
+  var count = 0;
+  //while(count == 250){
+    ctxioClient.accounts(ID).messages().get({limit: 100},
     function ( err, response) {
       if(err) throw err;
       
       console.log("getting responses...");
-      var contacts = response.body;
-      var matches = contacts.matches;
+      var date = response.body;
+      console.log(date[0].date);
 
       
-      for (var i = 0; i < matches.length; i++){
-        names.push(matches[i].name);
-        matches[i].email;
-      }     
-  });
+      
+      for (var i = 0; i < date.length; i++){
+        dateArray.push(timeFormat(date[i].date));
+        
+      }   
 
-  response.json({matches : names});
+      console.log(dateArray);
+      res.json({date : dateArray});  
+  });
+  //}  
 });
 
 
 app.use('/api', router);
 app.listen(port);
 console.log("Magic happens on port " + port);
+
+
 
 
