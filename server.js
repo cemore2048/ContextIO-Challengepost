@@ -1,15 +1,21 @@
 var http = require("http");
 var ContextIO = require('contextio');
+var express = require("express");
+
+var app = express();
+var bodyParser = require('body-parser');
+var router = express.Router();
 
 var EMAIL = "bajabob.tx@gmail.com";
 var ID = "559acaf250eeb4b6208b4569";
 
-http.createServer(function(request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write();
-  response.end();
-}).listen(8888);
 
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
+
+
+
+var port = process.env.PORT || 8888;
 
  
  var ctxioClient = new ContextIO.Client('2.0', {
@@ -17,33 +23,30 @@ http.createServer(function(request, response) {
     secret: "C43lwCkZjM12MMiF"
   });
 
+router.get('/messages', function(request, response) {
 
+  var names = [];
+  ctxioClient.accounts(ID).contacts().get({limit:250, sort_by: "count", sort_order: "desc"}, 
+    function ( err, response) {
+      if(err) throw err;
+      
+      console.log("getting responses...");
+      var contacts = response.body;
+      var matches = contacts.matches;
 
-  var emailArray = {};
-
-  ctxioClient.accounts(ID).contacts().get({limit:250, sort_by: "count", sort_order: "desc"}, function ( err, response) {
-    if(err) throw err;
-    
-    console.log("getting responses...");
-    var contacts = response.body;
-    var matches = contacts.matches;
-
-    console.log("getting queries");
-    console.log(contacts.query);
-
-    console.log("Matches email");
-    for (var i = 0; i < matches.length; i++){
-      console.log(matches[i].email);
-      console.log(matches[i].name)
-      console.log("Sent to : " + matches[i].sent_count.toString());
-      console.log("Sent received : " + matches[i].received_count.toString());
-
-    }
-    
-
-
-
-
-  	
+      
+      for (var i = 0; i < matches.length; i++){
+        names.push(matches[i].name);
+        matches[i].email;
+      }     
   });
+
+  response.json({matches : names});
+});
+
+
+app.use('/api', router);
+app.listen(port);
+console.log("Magic happens on port " + port);
+
 
