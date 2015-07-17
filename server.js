@@ -6,7 +6,6 @@ var app = express();
 var bodyParser = require('body-parser');
 var router = express.Router();
 
-var EMAIL = "bajabob.tx@gmail.com";
 var ID = "559acaf250eeb4b6208b4569";
 
 
@@ -24,38 +23,60 @@ var port = process.env.PORT || 8888;
   });
 //helper functions
 
+//returns an array containing date, and time
 var timeFormat = function(time){
+  var fullDate;
+  var time;
   var date = new Date(time*1000);
+  var stateArray = [];
+
   var day = date.getDate();
   var month = date.getMonth();
   var year = date.getFullYear();
 
-  return month + "/" + day + "/" + year;
+  fullDate = month + "/" + day + "/" + year;
+  stateArray.push(fullDate);  
+  
+  var hour = date.getHours();
+  var minute = date.getMinutes();
 
+  time = hour + ":" + minute;
+  stateArray.push(time);
+
+  return stateArray;
 }
 
 router.get('/messages',  function(request, res) {
 
-  var dateArray = [];
+  var myResponse = [];
   var count = 0;
+
+  
   //while(count == 250){
     ctxioClient.accounts(ID).messages().get({limit: 100},
     function ( err, response) {
+
       if(err) throw err;
       
-      console.log("getting responses...");
-      var date = response.body;
-      console.log(date[0].date);
+      var formattedTime;
+      var jsonResponseArray = response.body;
+      var gmailId;
+      var date;
 
       
       
-      for (var i = 0; i < date.length; i++){
-        dateArray.push(timeFormat(date[i].date));
-        
+      for (var i = 0; i < jsonResponseArray.length; i++){
+        formattedTime = timeFormat(jsonResponseArray[i].date)
+          var myObject = {
+              date : formattedTime[0],
+              time : formattedTime[1],
+              gmailId : jsonResponseArray[i].gmail_message_id
+          }
+          myResponse.push(myObject);
       }   
 
-      console.log(dateArray);
-      res.json({date : dateArray});  
+      
+      res.json({messages : myResponse});  
   });
   //}  
 });
