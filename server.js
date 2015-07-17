@@ -56,27 +56,28 @@ router.get('/messages',  function(request, res) {
     ctxioClient.accounts(ID).messages().get({limit: 100},
     function ( err, response) {
 
-      if(err) throw err;
-      
       var formattedTime;
       var jsonResponseArray = response.body;
       var gmailId;
       var date;
+      if(err) throw err;
 
-      
-      
+      console.log(jsonResponseArray.length);
+          
       for (var i = 0; i < jsonResponseArray.length; i++){
         formattedTime = timeFormat(jsonResponseArray[i].date)
+         jsonResponseArray[i].addresses.from.email;
+          
           var myObject = {
+              from : jsonResponseArray[i].addresses.from.email,
               date : formattedTime[0],
               time : formattedTime[1],
               gmailId : jsonResponseArray[i].gmail_message_id
           }
+
           myResponse.push(myObject);
       }   
-
-      
-      res.json({messages : myResponse});  
+      res.json({messages : myResponse});
   });
   //}  
 });
@@ -85,7 +86,3 @@ router.get('/messages',  function(request, res) {
 app.use('/api', router);
 app.listen(port);
 console.log("Magic happens on port " + port);
-
-
-
-
