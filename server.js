@@ -9,18 +9,17 @@ var router = express.Router();
 var ID = "559acaf250eeb4b6208b4569";
 
 
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 
 
 var port = process.env.PORT || 8888;
 
  
- var ctxioClient = new ContextIO.Client('2.0', {
+var ctxioClient = new ContextIO.Client('2.0', {
     key: "77dlwft1",
     secret: "C43lwCkZjM12MMiF"
-  });
+});
 //helper functions
 
 //returns an array containing date, and time
@@ -48,12 +47,13 @@ var timeFormat = function(time){
 
 router.get('/messages',  function(request, res) {
 
+  res.set("Content-Type", "application/json");
+  res.header("Access-Control-Allow-Origin", "*");
+  
   var myResponse = [];
   var count = 0;
 
-  
-  //while(count == 250){
-    ctxioClient.accounts(ID).messages().get({limit: 100},
+  ctxioClient.accounts(ID).messages().get({limit: 100},
     function ( err, response) {
 
       var formattedTime;
@@ -61,13 +61,12 @@ router.get('/messages',  function(request, res) {
       var gmailId;
       var date;
       if(err) throw err;
-
-      console.log(jsonResponseArray.length);
           
       for (var i = 0; i < jsonResponseArray.length; i++){
         formattedTime = timeFormat(jsonResponseArray[i].date)
          jsonResponseArray[i].addresses.from.email;
           
+          //console.log(jsonResponseArray[0]);
           var myObject = {
               from : jsonResponseArray[i].addresses.from.email,
               date : formattedTime[0],
