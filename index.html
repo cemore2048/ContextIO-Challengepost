@@ -4,11 +4,13 @@
 <head>
 	<title> </title>
 	<script src="node_modules/D3/d3.min.js" type="text/javascript"></script>
-	<script src="node_modules/server.js" type="text/javascript"></script>
-	<script src="noce_modules/jquery/jquery-2.1.4.js" type="text/javascript"></script>
+	<script src="server.js" type="text/javascript"></script>
+	<script src="node_modules/jquery/jquery-2.1.4.js" type="text/javascript"></script>
 
 	<script>
-			$.ajax
+			d3.json("/api/message", function(error, data){
+					console.log(data);
+			});
 	</script>
 <head>
 	<body>
