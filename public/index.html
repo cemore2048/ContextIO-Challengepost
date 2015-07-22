@@ -4,12 +4,20 @@
 <head>
 	<title> </title>
 	<script src="/d3.min.js" type="text/javascript"></script>
+	<script src="/jquery-2.1.4.js"
 
 
 	<script>
-			d3.json("/api/message", function(error, data){
-					console.log(data);
-			});
+	var data;
+	$.get("/api/message", function(data, status){
+			 console.log("Data: " + data + "\nStatus: " + status);
+	 });
+	// d3.json("/api/message", function(error, json) {
+	// 	//if (error) return console.warn(error);
+	// 	data = json;
+	// 	console.log(data);
+
+
 	</script>
 <head>
 	<body>
