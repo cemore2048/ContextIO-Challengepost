@@ -8,7 +8,7 @@ var router = express.Router();
 
 var ID = "559acaf250eeb4b6208b4569";
 
-app.use(express.static(__dirname + 'public'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -46,7 +46,7 @@ var timeFormat = function(time){
 }
 
 router.get('*', function(request, res) {
-  res.sendFile('./public/index.html');
+  res.sendfile('./public/index.html');
 });
 router.get('/messages',  function(request, res) {
 
