@@ -8,7 +8,7 @@ var router = express.Router();
 
 var ID = "559acaf250eeb4b6208b4569";
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + 'public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -81,7 +81,7 @@ router.get('/messages',  function(request, res) {
       }
       res.json({messages : myResponse});
   });
-  //}
+
 });
 
 
