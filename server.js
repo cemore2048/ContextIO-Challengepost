@@ -49,15 +49,19 @@ router.get('/', function(request, res) {
   res.sendfile('./public/index.html');
 });
 
-router.get('/messages',  function(request, res) {
+router.param('off', function(req, res, next, off){
+  req.offset = off;
+  next();
+});
+router.get('/messages/:off',  function(request, res) {
 
   res.set("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*");
 
-  var myResponse = [];
+  var myJSONResponse = [];
   var count = 0;
 
-  ctxioClient.accounts(ID).messages().get({limit: 100},
+  ctxioClient.accounts(ID).messages().get({limit: 100, offset: off},
     function ( err, response) {
 
       var formattedTime;
@@ -70,7 +74,7 @@ router.get('/messages',  function(request, res) {
         formattedTime = timeFormat(jsonResponseArray[i].date)
          jsonResponseArray[i].addresses.from.email;
 
-          //console.log(jsonResponseArray[0]);
+
           var myObject = {
               from : jsonResponseArray[i].addresses.from.email,
               date : formattedTime[0],
@@ -78,7 +82,7 @@ router.get('/messages',  function(request, res) {
               gmailId : jsonResponseArray[i].gmail_message_id
           }
 
-          myResponse.push(myObject);
+          myJSONResponse.push(myObject);
       }
       res.json({messages : myResponse});
   });
