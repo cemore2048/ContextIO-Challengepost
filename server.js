@@ -45,9 +45,10 @@ var timeFormat = function(time){
   return stateArray;
 }
 
-router.get('*', function(request, res) {
+router.get('/', function(request, res) {
   res.sendfile('./public/index.html');
 });
+
 router.get('/messages',  function(request, res) {
 
   res.set("Content-Type", "application/json");

@@ -4,23 +4,31 @@
 <head>
 	<title> </title>
 	<script src="/d3.min.js" type="text/javascript"></script>
-	<script src="/jquery-2.1.4.js"
+	<script src="/jquery-2.1.4.js"></script>
 
 
 	<script>
 	var data;
-	$.get("/api/message", function(data, status){
-			 console.log("Data: " + data + "\nStatus: " + status);
-	 });
+	$(document).ready(function() {
+		$("button").click(function() {
+			$.get("/api/messages", function(data, status){
+					 console.log("Data: " + data + "\nStatus: " + status);
+
+					 for(var i = 0; i < data.messages.length; i++){
+						 console.log(data.messages[i]);
+					 }
+
+			 });
+		});
+	});
+
 	// d3.json("/api/message", function(error, json) {
 	// 	//if (error) return console.warn(error);
 	// 	data = json;
 	// 	console.log(data);
-
-
 	</script>
-<head>
-	<body>
-
-	</body>
+</head>
+<body>
+		<button>Send an HTTP GET request to a page and get the result back</button>
+</body>
 <html>
