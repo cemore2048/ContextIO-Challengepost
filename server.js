@@ -53,15 +53,17 @@ router.param('off', function(req, res, next, off){
   req.offset = off;
   next();
 });
-router.get('/messages/:off',  function(request, res) {
+
+router.get('/messages/:offset?',  function(request, res) {
 
   res.set("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*");
 
+  var offset = request.param.offset || 0;
   var myJSONResponse = [];
   var count = 0;
 
-  ctxioClient.accounts(ID).messages().get({limit: 100, offset: off},
+  ctxioClient.accounts(ID).messages().get({limit: 100, offset: offset},
     function ( err, response) {
 
       var formattedTime;
@@ -84,7 +86,7 @@ router.get('/messages/:off',  function(request, res) {
 
           myJSONResponse.push(myObject);
       }
-      res.json({messages : myResponse});
+      res.json({messages : myJSONResponse});
   });
 
 });
