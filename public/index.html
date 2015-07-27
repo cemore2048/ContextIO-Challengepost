@@ -9,29 +9,34 @@
 
 	<script>
 	var data;
-	//while it keeps getting the limit, keep sending request
-	//with offset increasing by 100
-	var count = 0;
-	var count2 = 0;
-	var offset = 0;
-	var keepGoing = true;
+
+	function fetchAllMessages(start, increment, done){
+		var messaes = [];
+		(function nextCall(ofset){
+			d3.json("/api/messages/" + offset, function(error, data){
+				if(error) return done(error, messages);
+				if(!data.messages) return done("unexpected response format", messages);
+
+				messages.push.apply(messages, data.messages);
+				if( data.messages.length === increment) {
+					nextCall(offset + increment);
+				} else {
+					done(null, messages);
+				}
+			});
+		});(start);
+	}
 	$(document).ready(function() {
-		$('button').click(function() {
-			while(count2 != 5){
-				d3.json("/api/messages/" + offset, function(error, json) {
-					if (error) return console.warn(error);
-					data = json;
-					for(var i = 0; i < data.messages.length; i++){
-						console.log(data.messages[i].date);
+			$('button').click(function() {
+	        var start = Date.now();
 
-					}
-				});
-				console.log("offset is : " + offset);
-				count2++;
-				offset += 100;
-
-			}
-		});
+	        fetchAllMessages(0, 100, function (err, messages) {
+	            var end = Date.now();
+	            if (err) console.warn(err);
+	            console.log(messages);
+	            console.log("Time to execute : " + (start - end));
+	        });
+	    });
 	});
 
 
