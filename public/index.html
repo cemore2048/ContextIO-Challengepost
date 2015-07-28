@@ -10,24 +10,25 @@
 	<script>
 	var data;
 
-	function fetchAllMessages(start, increment, done){
-		var messaes = [];
-		(function nextCall(ofset){
-			d3.json("/api/messages/" + offset, function(error, data){
-				if(error) return done(error, messages);
-				if(!data.messages) return done("unexpected response format", messages);
+	function fetchAllMessages(start, increment, done) {
+    var messages = [];
+    (function nextCall(offset) {
+        d3.json("/api/messages/" + offset, function (error, data) {
+            if (error) return done(error, messages);
+            if (!data.messages) return done("unexpected response format", messages);
 
-				messages.push.apply(messages, data.messages);
-				if( data.messages.length === increment) {
-					nextCall(offset + increment);
-				} else {
-					done(null, messages);
-				}
-			});
-		});(start);
+            messages.push.apply(messages, data.messages);
+            if (data.messages.length === increment) {
+                nextCall(offset + increment);
+            } else {
+                done(null, messages);
+            }
+        });
+    })(start);
 	}
-	$(document).ready(function() {
-			$('button').click(function() {
+
+	$(function() {
+	    $('button').click(function() {
 	        var start = Date.now();
 
 	        fetchAllMessages(0, 100, function (err, messages) {
@@ -38,7 +39,6 @@
 	        });
 	    });
 	});
-
 
 	</script>
 </head>
