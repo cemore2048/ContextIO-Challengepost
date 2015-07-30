@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html>
 
 <head>
@@ -10,7 +10,7 @@
 	<script>
 	var data;
 
-	function fetchAllMessages(start, increment, done) {
+	var fetchAllMessages = function(start, increment, done) {
     var messages = [];
     (function nextCall(offset) {
         d3.json("/api/messages/" + offset, function (error, data) {
@@ -27,13 +27,11 @@
     })(start);
 	}
 
-	var call = function() {
-		return "hello";
-	}
+
 	$(function() {
 	    $('button').click(function() {
 	        var start = Date.now();
-					console.log(call());
+
 	        fetchAllMessages(0, 100, function (err, messages) {
 	            var end = Date.now();
 	            if (err) console.warn(err);
