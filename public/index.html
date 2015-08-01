@@ -9,32 +9,41 @@
 
 	<script>
 	var data;
-	var start = new Dat().getTime();
+	var start = new Date().getTime();
 	var offset = 0;
-	var maxOffset = 1000;
+	var maxOffset = 10000;
 	var baseUrl = "/api/messages";
 
+	var createArrayForD3 = function(json){
+		aggregateResponse.put(json);
+		
+	}
 	var callback = function(json) {
-		console.log(json);
+		var aggregateResponse = [];
+		aggregateResponse.push(json);
 		console.log("current offset: "  + offset);
 
 		data = json;
+
 		offset += 100;
 
 		if(offset > maxOffset){
 			var end = new Date().getTime();
 			var time = end - start;
-			console.log("Time to execute : "  + time);
+			console.log("Time to execute : "  + time/1000);
 			return;
 		}
 
 		d3.json(baseUrl + "/" + offset, callback);
 	}
 
-
-	$('button').click(function(){
-		d3.json(baseUrl + "/" + offset, callback);
+	$(document).ready(function(){
+		$('button').click(function(){
+			console.log("button clicked");
+			d3.json(baseUrl + "/" + offset, callback);
+		});
 	});
+
 
 	</script>
 </head>
