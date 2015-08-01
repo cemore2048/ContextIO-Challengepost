@@ -9,36 +9,31 @@
 
 	<script>
 	var data;
+	var start = new Dat().getTime();
+	var offset = 0;
+	var maxOffset = 1000;
+	var baseUrl = "/api/messages";
 
-	var fetchAllMessages = function(start, increment, done) {
-    var messages = [];
-    (function nextCall(offset) {
-        d3.json("/api/messages/" + offset, function (error, data) {
-            if (error) return done(error, messages);
-            if (!data.messages) return done("unexpected response format", messages);
+	var callback = function(json) {
+		console.log(json);
+		console.log("current offset: "  + offset);
 
-            messages.push.apply(messages, data.messages);
-            if (data.messages.length === increment) {
-                nextCall(offset + increment);
-            } else {
-                done(null, messages);
-            }
-        });
-    })(start);
+		data = json;
+		offset += 100;
+
+		if(offset > maxOffset){
+			var end = new Date().getTime();
+			var time = end - start;
+			console.log("Time to execute : "  + time);
+			return;
+		}
+
+		d3.json(baseUrl + "/" + offset, callback);
 	}
 
 
-	$(function() {
-	    $('button').click(function() {
-	        var start = Date.now();
-
-	        fetchAllMessages(0, 100, function (err, messages) {
-	            var end = Date.now();
-	            if (err) console.warn(err);
-	            console.log(messages);
-	            console.log("Time to execute : " + (start - end));
-	        });
-	    });
+	$('button').click(function(){
+		d3.json(baseUrl + "/" + offset, callback);
 	});
 
 	</script>
