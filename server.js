@@ -45,6 +45,8 @@ var timeFormat = function(time){
   return stateArray;
 }
 
+
+
 router.get('/', function(request, res) {
   res.sendfile('./public/index.html');
 });
@@ -77,20 +79,50 @@ router.get('/messages/:offset?',  function(request, res) {
          jsonResponseArray[i].addresses.from.email;
 
 
-          var myObject = {
+          var myMessagesObject = {
               from : jsonResponseArray[i].addresses.from.email,
               date : formattedTime[0],
               time : formattedTime[1],
               gmailId : jsonResponseArray[i].gmail_message_id
           }
 
-          myJSONResponse.push(myObject);
+          myJSONResponse.push(myMessagesObject);
       }
       res.json({messages : myJSONResponse});
   });
 
 });
 
+router.get('/contacts/:offset?', function(request, res){
+
+  res.set("Content-Type", "application/json");
+  res.header("Access-Control-Allow-Origin", "*");
+
+  var offset = request.param.offset || 0;
+  var myJSONResponse = [];
+  var contacts;
+  ctxioClient.accounts(ID).contacts().get({limit: 250, offset:offset,
+    sort_by: "count", order:"asc"}, function(err, response){
+    contacts = response.body;
+    console.log("The contacts are : " + contacts);
+    for(var i = 0; i < 250; i++){
+      console.log("adding to array");
+      var myContactsObject = {
+        name : contacts[i].name,
+        email : contacts[i].email,
+        count : contacts[i].count,
+        received: contacts[i].received_count,
+        sent: contacts[i].sent_count,
+        pic: contacts[i].thumbnail
+
+      }
+
+      myJSONResponse.push(myContactsObject);
+      
+    }
+    res.json({contacts: myJSONResponse});
+  });
+});
 
 app.use('/api', router);
 app.listen(port);

@@ -16,12 +16,22 @@
 
 	var createArrayForD3 = function(json){
 		aggregateResponse.put(json);
-		
+
 	}
 	var callback = function(json) {
 		var aggregateResponse = [];
 		aggregateResponse.push(json);
 		console.log("current offset: "  + offset);
+		var count = 0;
+		console.log(json);
+
+		if(json != null){
+			console.log("made it into null check");
+			for(var i = 0; i < json.length; i++){
+				console.log("count is : " + count);
+				count++;
+			}
+		}
 
 		data = json;
 
