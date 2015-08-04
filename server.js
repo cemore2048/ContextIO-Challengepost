@@ -104,21 +104,20 @@ router.get('/contacts/:offset?', function(request, res){
   ctxioClient.accounts(ID).contacts().get({limit: 250, offset:offset,
     sort_by: "count", order:"asc"}, function(err, response){
     contacts = response.body;
-    console.log("The contacts are : " + contacts);
-    for(var i = 0; i < 250; i++){
-      console.log("adding to array");
+
+    for(var i = 0; i < contacts.matches.length; i++){
       var myContactsObject = {
-        name : contacts[i].name,
-        email : contacts[i].email,
-        count : contacts[i].count,
-        received: contacts[i].received_count,
-        sent: contacts[i].sent_count,
-        pic: contacts[i].thumbnail
+        name : contacts.matches[i].name,
+        email : contacts.matches[i].email,
+        count : contacts.matches[i].count,
+        received: contacts.matches[i].received_count,
+        sent: contacts.matches[i].sent_count,
+        pic: contacts.matches[i].thumbnail
 
       }
 
       myJSONResponse.push(myContactsObject);
-      
+
     }
     res.json({contacts: myJSONResponse});
   });
