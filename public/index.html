@@ -11,9 +11,10 @@
 	var data;
 	var offset = 0;
 	var maxOffset = 1000;
-	var baseUrl = "/api/messages";
+	var messagesUrl = "/api/messages";
+	var contactsUrl = "api/messages";
 
-	var callback = function(json) {
+	var messagesCallback = function(json) {
 		var aggregateResponse = [];
 		aggregateResponse.push(json);
 		console.log("current offset: "  + offset);
@@ -41,7 +42,14 @@
 			return aggregateResponse;
 		}
 
-		d3.json(baseUrl + "/" + offset, callback);
+		d3.json(messagesUrl + "/" + offset, messagesCallback);
+	}
+
+	var contactsCallback = function(json){
+		
+	}
+	var getListOfContacts = function(){
+		d3.json(contactsUrl + "/" + offset, contactsCallback);
 	}
 
 	$(document).ready(function(){
@@ -50,7 +58,8 @@
 			//d3.json is asynchronous. the program will get to this function
 			//and immediately go to the next line while the function is still running
 			//because of that. the visualization must be called within the callback
-			d3.json(baseUrl + "/" + offset, callback);
+			d3.json(messagesUrl + "/" + offset, callback);
+
 
 
 		});
