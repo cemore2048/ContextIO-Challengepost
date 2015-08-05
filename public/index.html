@@ -8,29 +8,25 @@
 
 
 	<script>
-	var data;
 	var offset = 0;
 	var maxOffset = 1000;
 	var messagesUrl = "/api/messages";
-	var contactsUrl = "api/messages";
+	var contactsUrl = "api/contacts";
+	var start;
+	var messagesResponse = [];
+	var contactsResponse = [];
 
 	var messagesCallback = function(json) {
-		var aggregateResponse = [];
-		aggregateResponse.push(json);
-		console.log("current offset: "  + offset);
-		var count = 0;
-		console.log(json);
+		console.log("executing request...");
+		messagesResponse.push(json);
 
-		if(json != null){
-			console.log("made it into null check");
-			for(var i = 0; i < json.length; i++){
-				console.log("count is : " + count);
-				count++;
-			}
-		}
-
-		data = json;
-
+		// if(json != null){
+		// 	console.log("made it into null check");
+		// 	for(var i = 0; i < json.length; i++){
+		// 		console.log("count is : " + count);
+		// 		count++;
+		// 	}
+		// }
 		offset += 100;
 
 		if(offset > maxOffset){
@@ -39,35 +35,44 @@
 			console.log("Time to execute : "  + time/1000);
 			//aqui vas a hacer la visualisacion
 
-			return aggregateResponse;
+			return;
 		}
 
 		d3.json(messagesUrl + "/" + offset, messagesCallback);
 	}
 
 	var contactsCallback = function(json){
-		
-	}
-	var getListOfContacts = function(){
-		d3.json(contactsUrl + "/" + offset, contactsCallback);
+		contactsResponse.push(json);
+		console.log("executing contacts");
+		console.log(json.contacts[0]);
+		for( var i = 0; i < json.contacts.length; i++){
+			console.log(json.contacts[i].name);
+		}
+
+
+		return;
+
 	}
 
+
 	$(document).ready(function(){
-		$('button').click(function(){
-			var start = new Date().getTime();
+		$('#butt').click(function(){
+			start = new Date().getTime();
 			//d3.json is asynchronous. the program will get to this function
 			//and immediately go to the next line while the function is still running
 			//because of that. the visualization must be called within the callback
-			d3.json(messagesUrl + "/" + offset, callback);
-
-
-
+			d3.json(messagesUrl + "/" + offset, messagesCallback);
 		});
+		$('#contacts').click(function(){
+			start = new Date().getTime();
+			d3.json(contactsUrl + "/" + offset, contactsCallback);
+		})
 	});
 
 	</script>
 </head>
 <body>
-		<button>Send an HTTP GET request to a page and get the result back</button>
+		<button id="butt">Send an HTTP GET request to a page and get the result back</button>
+		<button id="contacts">Get contacts</button>
 </body>
 <html>
