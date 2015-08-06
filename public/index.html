@@ -49,12 +49,20 @@
 			console.log(json.contacts[i].name);
 		}
 
+		//TODO fix this
+		$('#my-final-table').dynatable({
+		  dataset: {
+		    record : json
+		  }
+		});
 
 		return;
 
 	}
 
+	var listContacts = function(contactsJson){
 
+	}
 	$(document).ready(function(){
 		$('#butt').click(function(){
 			start = new Date().getTime();
@@ -74,6 +82,13 @@
 <body>
 		<button id="butt">Send an HTTP GET request to a page and get the result back</button>
 		<button id="contacts">Get contacts</button>
-		
+		<table id="my-final-table">
+  		<thead>
+    		<th>name</th>
+    		<th></th>
+  		</thead>
+  		<tbody>
+  		</tbody>
+		</table>
 </body>
 <html>
