@@ -13,7 +13,7 @@
 	var offset = 0;
 	var maxOffset = 1000;
 	var messagesUrl = "/api/messages";
-	var contactsUrl = "api/contacts";
+	var contactsUrl = "/api/contacts";
 	var start;
 	var messagesResponse = [];
 	var contactsResponse = [];
@@ -46,18 +46,17 @@
 	var contactsCallback = function(json){
 		contactsResponse.push(json);
 		console.log("executing contacts");
-		console.log(json.contacts[0]);
-		for( var i = 0; i < json.contacts.length; i++){
-			console.log(json.contacts[i].name);
+		console.log(json);
+		for( var i = 0; i < json.length; i++){
+			console.log(json[i].name);
 		}
 
 		//TODO fix this
 		$('#my-final-table').dynatable({
-		  dataset: {
+ 		  dataset: {
 		    record : json
 		  }
 		});
-
 		return;
 
 	}

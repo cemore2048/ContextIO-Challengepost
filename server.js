@@ -121,7 +121,7 @@ router.get('/contacts/:offset?', function(request, res){
       myJSONResponse.push(myContactsObject);
 
     }
-    res.json({contacts: myJSONResponse});
+    res.json([myJSONResponse]);
   });
 });
 
