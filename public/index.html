@@ -50,12 +50,9 @@
 			console.log(json[i].name);
 		}
 
-		//TODO fix this
-		$('#my-final-table').dynatable({
- 		  dataset: {
-		    record : json
-		  }
-		});
+
+		//jsonToHtmlTable(json, "#contacts")
+		populateTable(json);
 		return;
 
 	}
@@ -64,7 +61,7 @@
 
 	}
 	$(document).ready(function(){
-		$('#butt').click(function(){
+		$('#messages').click(function(){
 			start = new Date().getTime();
 			//d3.json is asynchronous. the program will get to this function
 			//and immediately go to the next line while the function is still running
@@ -77,18 +74,27 @@
 		})
 	});
 
+	var populateTable = function (data) {
+    var tr;
+    for (var i = 0; i < data.length; i++) {
+        tr = $('<tr/>');
+        tr.append("<td>" + data[i].User_Name + "</td>");
+        tr.append("<td>" + data[i].score + "</td>");
+        tr.append("<td>" + data[i].team + "</td>");
+        $('table').append(tr);
+    }
+	}
+
 	</script>
 </head>
 <body>
-		<button id="butt">Send an HTTP GET request to a page and get the result back</button>
+		<button id="messages">Send an HTTP GET request to a page and get the result back</button>
 		<button id="contacts">Get contacts</button>
-		<table id="my-final-table">
-  		<thead>
-    		<th>name</th>
-    		<th></th>
-  		</thead>
-  		<tbody>
-  		</tbody>
+		<table id="contacts">
+			<thead>
+					<tr></tr>
+			</thead>
+			<tbody></tbody>
 		</table>
 </body>
 <html>

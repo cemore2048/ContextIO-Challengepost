@@ -57,7 +57,7 @@ router.param('off', function(req, res, next, off){
   req.offset = off;
   next();
 });
-
+//nconf
 router.get('/messages/:offset?',  function(request, res) {
 
   res.set("Content-Type", "application/json");
