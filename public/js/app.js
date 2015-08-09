@@ -1,15 +1,19 @@
-angular.module("contextio-challenge",[]).
+angular.module("contextioChallenge",[]).
 controller("indexController", function($scope, $http){
 
-  var messagesUrl = "api/messages";
+  var messagesUrl = "/api/messages";
+  var contactsUrl = "/api/contacts";
 
-  $scope.getMessages = function(){
-    $http.get(messagesUrl).
+    $http.get(contactsUrl).
       then(function(response) {
-        console.log(response);
+        console.log(response.data.contacts);
+        $scope.contacts = response.data.contacts;
+
       }, function(response) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
       });
-  }
+
+
+
 });
