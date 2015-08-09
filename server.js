@@ -11,6 +11,7 @@ var ID = "559acaf250eeb4b6208b4569";
 //commmit
 
 app.use(express.static(__dirname + '/public'));
+app.use('/bower_components', express.static(__dirname+ '/bower_components'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
