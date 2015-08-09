@@ -1,0 +1,32 @@
+{
+  "name": "ContextIO Challenge",
+  "version": "0.0.1",
+  "description": "ContextIO ChallengePost Project",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "https://github.com/ralphie9224/ContextIO-Challengepost",
+  "authors": [
+    "ralphie9224 <rmoreno.cesar@gmail.com>"
+  ],
+  "main": "server.js",
+  "moduleType": [
+    "es6",
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "d3": "~3.5.6",
+    "jquery": "~2.1.4"
+  }
+}
