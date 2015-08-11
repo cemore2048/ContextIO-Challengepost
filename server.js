@@ -58,13 +58,19 @@ router.param('off', function(req, res, next, off){
   req.offset = off;
   next();
 });
+
+router.param('e', function(req, res, next, e){
+  req.email = e;
+  next();
+});
 //nconf
 router.get('/messages/:offset?',  function(request, res) {
 
   res.set("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*");
 
-  var offset = request.param.offset || 0;
+  var offset = request.params.offset || 0;
+
   var myJSONResponse = [];
   var count = 0;
 
@@ -96,12 +102,27 @@ router.get('/messages/:offset?',  function(request, res) {
 
 });
 
+router.get('/messages/:email', function(request, res){
+  res.set("Content-Type", "application/json");
+  res.header("Access-Control-Allow-Origin", "*");
+
+  var email = request.params.email;
+
+  var myJSONResponse = [];
+
+  ctxioClient.accounts(ID).messages().get({limit: 1, include_body: 1, from: email},
+    function(err, response){
+      myJSONResponse.push(response.body);
+        res.json(response.body);
+    });
+});
+
 router.get('/contacts/:offset?', function(request, res){
 
   res.set("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*");
 
-  var offset = request.param.offset || 0;
+  var offset = request.params.offset || 0;
   var myJSONResponse = [];
   var contacts;
   ctxioClient.accounts(ID).contacts().get({limit: 250, offset:offset,
