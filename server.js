@@ -6,7 +6,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var router = express.Router();
 
-var ID = "559acaf250eeb4b6208b4569";
+var ID = "55c575eafe17e8cd1b8b4575";
 
 //commmit
 
@@ -20,8 +20,8 @@ var port = process.env.PORT || 8888;
 
 
 var ctxioClient = new ContextIO.Client('2.0', {
-    key: "77dlwft1",
-    secret: "C43lwCkZjM12MMiF"
+    key: "js9ki9z3",
+    secret: "tB9tPwcqcyrxQ05a"
 });
 //helper functions
 
@@ -74,7 +74,8 @@ router.get('/messages/:offset?/',  function(request, res) {
   var myJSONResponse = [];
   var count = 0;
 
-  ctxioClient.accounts(ID).messages().get({limit: 100, offset: offset, include_body: 1},
+  ctxioClient.accounts(ID).messages().get({limit: 100, offset: offset, include_body: 1,
+    body_type: "text/html"},
     function ( err, response) {
 
       var formattedTime;
