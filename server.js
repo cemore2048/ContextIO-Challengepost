@@ -64,17 +64,17 @@ router.param('e', function(req, res, next, e){
   next();
 });
 //nconf
-router.get('/messages/:offset?',  function(request, res) {
+router.get('/messages/:offset?/',  function(request, res) {
 
   res.set("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*");
 
-  var offset = request.params.offset || 0;
+  var offset = request.query.offset || 0;
 
   var myJSONResponse = [];
   var count = 0;
 
-  ctxioClient.accounts(ID).messages().get({limit: 100, offset: offset},
+  ctxioClient.accounts(ID).messages().get({limit: 100, offset: offset, include_body: 1},
     function ( err, response) {
 
       var formattedTime;
@@ -82,7 +82,7 @@ router.get('/messages/:offset?',  function(request, res) {
       var gmailId;
       var date;
       if(err) throw err;
-
+      console.log(jsonResponseArray[0].body);
       for (var i = 0; i < jsonResponseArray.length; i++){
         formattedTime = timeFormat(jsonResponseArray[i].date)
          jsonResponseArray[i].addresses.from.email;
@@ -93,6 +93,7 @@ router.get('/messages/:offset?',  function(request, res) {
               date : formattedTime[0],
               time : formattedTime[1],
               gmailId : jsonResponseArray[i].gmail_message_id
+
           }
 
           myJSONResponse.push(myMessagesObject);
@@ -102,20 +103,20 @@ router.get('/messages/:offset?',  function(request, res) {
 
 });
 
-router.get('/messages/:email', function(request, res){
-  res.set("Content-Type", "application/json");
-  res.header("Access-Control-Allow-Origin", "*");
-
-  var email = request.params.email;
-
-  var myJSONResponse = [];
-
-  ctxioClient.accounts(ID).messages().get({limit: 1, include_body: 1, from: email},
-    function(err, response){
-      myJSONResponse.push(response.body);
-        res.json(response.body);
-    });
-});
+// router.get('/messages/:email', function(request, res){
+//   res.set("Content-Type", "application/json");
+//   res.header("Access-Control-Allow-Origin", "*");
+//
+//   var email = request.params.email;
+//
+//   var myJSONResponse = [];
+//
+//   ctxioClient.accounts(ID).messages().get({limit: 1, include_body: 1, from: email},
+//     function(err, response){
+//       myJSONResponse.push(response.body);
+//         res.json(response.body);
+//     });
+// });
 
 router.get('/contacts/:offset?', function(request, res){
 
