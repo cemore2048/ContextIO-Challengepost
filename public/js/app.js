@@ -12,7 +12,7 @@ controller("indexController", function($scope, $http){
         $scope.newContacts = [];
         angular.forEach(contacts , function(){
           if(contacts.sent != 0){
-            newContacts.push(contacts);
+            $scope.newContacts.push(contacts);
           }
         });
 
