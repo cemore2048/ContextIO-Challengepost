@@ -21,7 +21,7 @@ var port = process.env.PORT || 8888;
 
 var ctxioClient = new ContextIO.Client('2.0', {
     key: "js9ki9z3",
-    secret: "tB9tPwcqcyrxQ05a"
+    secret: "O9yn28hmhxzBgTnn"
 });
 //helper functions
 

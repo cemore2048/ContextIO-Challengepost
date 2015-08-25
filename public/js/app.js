@@ -1,7 +1,7 @@
 angular.module("contextioChallenge",[]).
 controller("indexController", function($scope, $http){
 
-  var messagesUrl = "/api/messages";
+  var messagesUrl = "/api/messages/";
   var contactsUrl = "/api/contacts/";
 
 
