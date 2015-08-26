@@ -10,11 +10,8 @@ controller("indexController", function($scope, $http){
         console.log(response.data.contacts);
         $scope.contacts = response.data.contacts;
 
-      }, function(response) {
+      }, function(error) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
       });
-
-
-
 });
