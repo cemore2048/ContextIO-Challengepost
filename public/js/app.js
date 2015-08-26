@@ -10,6 +10,7 @@ controller("indexController", function($scope, $http){
         console.log(response.data.contacts);
         $scope.contacts = response.data.contacts;
 
+
       }, function(error) {
         // called asynchronously if an error occurs
         // or server returns response with an error status.
@@ -17,17 +18,18 @@ controller("indexController", function($scope, $http){
 
 //rafa
 
-      $scope.clickAction = function(email) {
-        $http.get(messagesUrl + email ).
+      $scope.clickAction = function(x) {
+        $http.get(messagesUrl + x.email ).
           then(function(response) {
-            console.log(timeFormat(response.data[0].date));
-
+            $scope.sent = x.sent;
+            $scope.received = x.received;
+            $scope.total = x.count;
           }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
           });
-        $scope.n = email;
-        // console.log(name);
+
+
       };
       var timeFormat = function(time){
         var fullDate;

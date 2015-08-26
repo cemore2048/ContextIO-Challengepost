@@ -11,13 +11,24 @@
 		<table id="contacts">
 			<tr ng-repeat="x in contacts">
 
-					<td><button ng-click='clickAction(x.email)'>{{x.name}}</button></td>
+					<td><button ng-click='clickAction(x)'>{{x.name}}</button></td>
 					<!-- <td>{{x.count}}</td>
 					<td>{{x.received}}</td>
 					<td>{{x.sent}}</td> -->
 
 			</tr>
-				{{n}}
+				<div   id = "sent" class="count">
+						{{sent}}
+
+				</div>
+
+				<div id = "recieved" class="count">
+						{{received}}
+				</div>
+
+				<div id = "total" class="count">
+						{{total}}
+				</div>
 			<div ng-hide="">
 
 			</div>
