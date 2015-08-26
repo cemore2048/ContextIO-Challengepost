@@ -8,16 +8,7 @@ controller("indexController", function($scope, $http){
     $http.get(contactsUrl).
       then(function(response) {
         console.log(response.data.contacts);
-        var contacts = response.data.contacts;
-        $scope.newContacts = [];
-        // angular.forEach(contacts , function(){
-        //   if(contacts.sent != 0){
-        //     $scope.newContacts.push(contacts);
-        //   }
-        });
-
-
-
+        $scope.contacts = response.data.contacts;
 
       }, function(response) {
         // called asynchronously if an error occurs
