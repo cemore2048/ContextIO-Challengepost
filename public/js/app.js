@@ -24,6 +24,12 @@ controller("indexController", function($scope, $http){
             $scope.sent = x.sent;
             $scope.received = x.received;
             $scope.total = x.count;
+            $scope.dates = [];
+            console.log(response.data[0].date);
+            for(var i = 0; i < response.data.length; i++){
+              $scope.dates.push(response.data[i].date);
+              console.log(response.data[i].date);
+            }
           }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
