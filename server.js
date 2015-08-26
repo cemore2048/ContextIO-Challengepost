@@ -112,7 +112,7 @@ router.get('/messages/:email', function(request, res){
 
   var myJSONResponse = [];
 
-  ctxioClient.accounts(ID).messages().get({limit: 1, include_body: 1, from: email},
+  ctxioClient.accounts(ID).messages().get({limit: 100, from: email},
     function(err, response){
       myJSONResponse.push(response.body);
         res.json(response.body);
