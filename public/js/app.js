@@ -16,5 +16,19 @@ controller("indexController", function($scope, $http){
       });
 
 
+      $scope.clickAction = function(email) {
+        $http.get(messagesUrl + email ).
+          then(function(response) {
+            console.log(response.data.messages);
+            $scope.contacts = response.data.messages;
+
+          }, function(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+        $scope.n = name;
+        // console.log(name);
+      };
+
 
 });
