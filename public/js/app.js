@@ -10,10 +10,10 @@ controller("indexController", function($scope, $http){
         console.log(response.data.contacts);
         var contacts = response.data.contacts;
         $scope.newContacts = [];
-        angular.forEach(contacts , function(){
-          if(contacts.sent != 0){
-            $scope.newContacts.push(contacts);
-          }
+        // angular.forEach(contacts , function(){
+        //   if(contacts.sent != 0){
+        //     $scope.newContacts.push(contacts);
+        //   }
         });
 
 
