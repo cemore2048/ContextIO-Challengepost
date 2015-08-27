@@ -27,8 +27,9 @@ controller("indexController", function($scope, $http){
             $scope.dates = [];
             console.log(response.data[0].date);
             for(var i = 0; i < response.data.length; i++){
-              $scope.dates.push(response.data[i].date);
-              console.log(response.data[i].date);
+              $scope.dates.push(timeFormat(response.data[i].date));
+              console.log($scope.dates[i]);
+
             }
           }, function(response) {
             // called asynchronously if an error occurs
