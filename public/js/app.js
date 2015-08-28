@@ -73,6 +73,7 @@ controller("indexController", function($scope, $http){
                 },
                 showDistX: true,
                 showDistY: true,
+                showLegend: false,
                 tooltipContent: function(key) {
                     return '<h3>' + key + '</h3>';
                 },
@@ -80,26 +81,29 @@ controller("indexController", function($scope, $http){
                 xAxis: {
                     axisLabel: 'X Axis',
                     tickFormat: function(d){
-                        return d3.format('.02f')(d);
+                        return d3.time.scale('%x')(new Date(d));
                     }
                 },
                 yAxis: {
                     axisLabel: 'Y Axis',
                     tickFormat: function(d){
-                        return d3.format('.02f')(d);
+                        return d3.time.format('%H:%M')(new Date(d));
                     },
                     axisLabelDistance: 30
-                }
+                },
+
             }
           };
 
        /* Chart data
         http://krispo.github.io/angular-nvd3/#/quickstart
         https://github.com/krispo/angular-nvd3/blob/gh-pages/js/scatterChart.js
+        https://github.com/mbostock/d3/wiki/Time-Formatting
        */
 
        var generateData = function(dates) {
-         console.log("dates : " + dates[1][1]);
+         console.log("dates : " + dates[0][0]);
+         console.log("dates : " + dates[0][1]);
             var data = [],
                 shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
                   random = d3.random.normal();
@@ -111,8 +115,8 @@ controller("indexController", function($scope, $http){
 
                 for (var j = 0; j < dates.length; j++) {
                     data[i].values.push({
-                        x: dates[j][0] //date
-                        , y: dates[j][1] // time of day
+                        x: new Date(random()) //date
+                        , y: random() // time of day
                     });
                 }
             }
