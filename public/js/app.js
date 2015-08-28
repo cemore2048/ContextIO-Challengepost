@@ -224,14 +224,14 @@ controller("indexController", function($scope, $http){
                     data[i].values.push({
                         x: random()
                         , y: random()
-                        , size: Math.random()
+                        //, size: Math.random()
                         , shape: shapes[j % 6]
                     });
                 }
             }
             return data;
         }
-  
+
 
 
 });
