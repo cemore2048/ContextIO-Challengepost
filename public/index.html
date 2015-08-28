@@ -5,6 +5,16 @@
 	<title> </title>
 	<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="/bower_components/index.css">
+	<!--  D3 stuff that i am trying-->
+		<meta charset="utf-8">  <!-- it's important for d3.js -->
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/d3/d3.js"></script>
+		<script src="bower_components/nvd3/nv.d3.js"></script> <!-- or use another assembly -->
+		<script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
+		<link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">
+
+	<!--  D3 stuff that i am trying-->
+
 </head>
 <body ng-controller="indexController">
 
@@ -16,7 +26,13 @@
 						<th>Email</th>
 					</tr>
 				</thead>
+
 				<tbody>
+				<div ng-app="contextioChallenge">
+						<div ng-controller="indexController">
+								<nvd3 options="options" data="data"></nvd3>
+						</div>
+					</div>
 					<tr ng-repeat="x in contacts">
 						<!-- <td class="checkbox">
 							<label>
