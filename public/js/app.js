@@ -116,6 +116,8 @@ controller("indexController", function($scope, $http){
                     });
                 }
             }
+
+            console.log("This is data : " + data);
             return data;
         }
 
