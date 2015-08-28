@@ -1,5 +1,28 @@
-.table {
-  height: 25%;
-  width: 25%;
-  overlow:auto;
+table {
+    width: 100%;
+}
+
+thead, tbody, tr, td, th { display: block; }
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 3em;
+
+    /*text-align: left;*/
+}
+
+tbody {
+    height: 30em;
+    overflow-y: auto;
+}
+
+tbody td, thead th {
+    width: 50%;
+    float: left;
 }
