@@ -31,7 +31,7 @@ controller("indexController", function($scope, $http){
               $scope.dates.push(timeFormat(response.data[i].date));
               console.log(response.data[i].date);
             }
-            $scope.data = generateData($scope.dates);
+            // $scope.data = generateData($scope.dates);
           }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -64,7 +64,7 @@ controller("indexController", function($scope, $http){
 
   // NVD3 stuff
 
-  $scope.options = {chart: {
+      $scope.options = {chart: {
                 type: 'scatterChart',
                 height: 450,
                 color: d3.scale.category10().range(),
@@ -101,29 +101,31 @@ controller("indexController", function($scope, $http){
         https://github.com/mbostock/d3/wiki/Time-Formatting
        */
 
-       var generateData = function(dates) {
-         console.log("dates : " + dates[0][0]);
-         console.log("dates : " + dates[0][1]);
-            var data = [],
-                shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
-                  random = d3.random.normal();
-            for (var i = 0; i < dates.length; i++) {
-                data.push({
-                    key: 'dates ' + i,
-                    values: []
-                });
+     $scope.generateData = function() {
+         var w = 940,
+          h = 300,
+          pad = 20,
+          left_pad = 100,
+          Data_url = '/data.json';
 
-                for (var j = 0; j < dates.length; j++) {
-                    data[i].values.push({
-                        x: new Date(random()) //date
-                        , y: random() // time of day
-                    });
-                }
-            }
+          var svg = d3.select("#punchcard")
+                      .append("svg")
+                      .attr("width", w)
+                      .attr("height", h);
 
-            console.log("This is data : " + data);
-            return data;
-        }
+          var x = d3.scale.linear().domain([0, 23]).range([left_pad, w-pad]),
+              y = d3.scale.linear().domain([0, 6]).range([pad, h-pad*2]);
+
+          svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0, "+(h-pad)+")")
+            .call(xAxis);
+
+          svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate("+(left_pad-pad)+", 0)")
+            .call(yAxis);
+       }
 
 
 
