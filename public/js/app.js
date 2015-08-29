@@ -29,7 +29,7 @@ controller("indexController", function($scope, $http){
 
             for(var i = 0; i < response.data.length; i++){
               $scope.dates.push(timeFormat(response.data[i].date));
-              console.log(response.data[i].date);
+              // console.log(response.data[i].date);
             }
             $scope.data = generateData($scope.dates);
           }, function(response) {
@@ -81,7 +81,7 @@ controller("indexController", function($scope, $http){
                 xAxis: {
                     axisLabel: 'X Axis',
                     tickFormat: function(d){
-                        return d3.time.scale('%x')(new Date(d));
+                        return d3.time.format('%x')(new Date(d));
                     }
                 },
                 yAxis: {
@@ -104,10 +104,11 @@ controller("indexController", function($scope, $http){
        var generateData = function(dates) {
          console.log("dates : " + dates[0][0]);
          console.log("dates : " + dates[0][1]);
+         console.log("date length: " + dates.length);
             var data = [],
                 shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
                   random = d3.random.normal();
-            for (var i = 0; i < dates.length; i++) {
+            for (var i = 0; i < 1; i++) {
                 data.push({
                     key: 'dates ' + i,
                     values: []
@@ -115,7 +116,7 @@ controller("indexController", function($scope, $http){
 
                 for (var j = 0; j < dates.length; j++) {
                     data[i].values.push({
-                        x: new Date(random()) //date
+                        x:  random()//date
                         , y: random() // time of day
                     });
                 }
