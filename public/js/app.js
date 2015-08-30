@@ -1,5 +1,5 @@
 angular.module("contextioChallenge",['nvd3']).
-controller("indexController", function($scope, $http){
+controller("contentController", function($scope, $http){
 
   var messagesUrl = "/api/messages/";
   var contactsUrl = "/api/contacts/";
@@ -66,7 +66,7 @@ controller("indexController", function($scope, $http){
 
   $scope.options = {chart: {
                 type: 'scatterChart',
-                height: 450,
+                height: 400,
                 color: d3.scale.category10().range(),
                 scatter: {
                     onlyCircles: false
@@ -107,7 +107,8 @@ controller("indexController", function($scope, $http){
          console.log("date length: " + dates.length);
             var data = [],
                 shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
-                  random = d3.random.normal();
+                random = d3.random.normal();
+            var parser = d3.time.format("%m/%d/%y");
             for (var i = 0; i < 1; i++) {
                 data.push({
                     key: 'dates ' + i,
@@ -115,9 +116,10 @@ controller("indexController", function($scope, $http){
                 });
 
                 for (var j = 0; j < dates.length; j++) {
+
                     data[i].values.push({
-                        x:  random()//date
-                        , y: random() // time of day
+                        x:  new Date(dates[j][0]),//date
+                        y: parser. // time of day
                     });
                 }
             }
