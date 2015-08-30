@@ -70,10 +70,10 @@ router.param('email', function(req, res, next, email){
 });
 //nconf
 
-router.post('/add:emailAdd', function(req, res){
-  var emailAdd = reqest.params.emailAdd;
+router.post('/add', function(req, res){
+  var emailAdd = reqest.body.text;
 
-  ctxioClient.accounts(ID).connect_tokens().post({callback_url: "localhost:8887/content", email: emailAdd},
+  ctxioClient.accounts(ID).connect_tokens().post({callback_url: "/content.html", email: emailAdd},
     function(err, response){
       console.log("this was the post response: " + response.body);
     });

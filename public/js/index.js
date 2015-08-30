@@ -3,8 +3,8 @@ controller("indexController", function($scope, $http){
 
   var addEmailUrl = "/app/add/"
   $scope.authenticate = function(email) {
-    $http.post(addEmailUrl + email).
-      then(function(response) {
+    $http.post(addEmailUrl, email).
+      then(function(response,) {
 
 
       }, function(response) {
