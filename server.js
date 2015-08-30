@@ -63,46 +63,21 @@ router.param('e', function(req, res, next, e){
   req.email = e;
   next();
 });
+
+reouter.param('email', function(req, res, next, email){
+  req.emailAdd = email;
+  next();
+});
 //nconf
-// router.get('/messages/:offset?/',  function(request, res) {
-//
-//   res.set("Content-Type", "application/json");
-//   res.header("Access-Control-Allow-Origin", "*");
-//
-//   var offset = request.query.offset || 0;
-//
-//   var myJSONResponse = [];
-//   var count = 0;
-//
-//   ctxioClient.accounts(ID).messages().get({limit: 100, offset: offset, include_body: 1,
-//     body_type: "text/html"},
-//     function ( err, response) {
-//
-//       var formattedTime;
-//       var jsonResponseArray = response.body;
-//       var gmailId;
-//       var date;
-//       if(err) throw err;
-//       console.log(jsonResponseArray[0].body);
-//       for (var i = 0; i < jsonResponseArray.length; i++){
-//         formattedTime = timeFormat(jsonResponseArray[i].date)
-//          jsonResponseArray[i].addresses.from.email;
-//
-//
-//           var myMessagesObject = {
-//               from : jsonResponseArray[i].addresses.from.email,
-//               date : formattedTime[0],
-//               time : formattedTime[1],
-//               gmailId : jsonResponseArray[i].gmail_message_id
-//
-//           }
-//
-//           myJSONResponse.push(myMessagesObject);
-//       }
-//       res.json({messages : myJSONResponse});
-//   });
-//
-// });
+
+router.post('/add:emailAdd', function(req, res){
+  var emailAdd = reqest.params.emailAdd;
+
+  ctxioClient.accounts(ID).connect_tokens().post({callback_url: "localhost:8887/content", email: emailAdd},
+    function(err, response){
+      console.log("this was the post response: " + response.body);
+    });
+});
 
 router.get('/messages/:email', function(request, res){
   res.set("Content-Type", "application/json");
