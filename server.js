@@ -64,7 +64,7 @@ router.param('e', function(req, res, next, e){
   next();
 });
 
-reouter.param('email', function(req, res, next, email){
+router.param('email', function(req, res, next, email){
   req.emailAdd = email;
   next();
 });
