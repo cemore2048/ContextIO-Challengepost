@@ -1,11 +1,12 @@
 angular.module("contextioChallenge",[]).
-controller("indexController", function($scope, $http){
+controller("indexController", function($scope, $http, $window){
 
-  var addEmailUrl = "/app/add/"
+  var addEmailUrl = "/api/add/"
   $scope.authenticate = function(email) {
-    $http.post(addEmailUrl, email).
-      then(function(response,) {
-
+    $http.post(addEmailUrl, {e: email}).
+      then(function(response) {
+        console.log(response.data);
+        $window.location.href = response.data.browser_redirect_url;
 
       }, function(response) {
         // called asynchronously if an error occurs
