@@ -49,8 +49,11 @@ controller("indexController", function($scope, $http){
         var month = date.getMonth();
         var year = date.getFullYear();
 
-        fullDate = month + "/" + day + "/" + year;
-        stateArray.push(fullDate);
+        fullDate = month + "-" + day + "-" + year;
+
+
+        stateArray.push(fullDate); // changed the date casting here
+        //stateArray.push(testThis); // changed the date casting here
 
         var hour = date.getHours();
         var minute = date.getMinutes();
@@ -69,7 +72,7 @@ controller("indexController", function($scope, $http){
                 height: 450,
                 color: d3.scale.category10().range(),
                 scatter: {
-                    onlyCircles: false
+                    onlyCircles: true
                 },
                 showDistX: true,
                 showDistY: true,
@@ -81,7 +84,7 @@ controller("indexController", function($scope, $http){
                 xAxis: {
                     axisLabel: 'X Axis',
                     tickFormat: function(d){
-                        return d3.time.format('%x')(new Date(d));
+                        return d3.time.format('%m-%d-%Y')(new Date(d));
                     }
                 },
                 yAxis: {
@@ -102,8 +105,9 @@ controller("indexController", function($scope, $http){
        */
 
        var generateData = function(dates) {
-         console.log("dates : " + dates[0][0]);
-         console.log("dates : " + dates[0][1]);
+          // var f = d3.time.format('%H:%M');
+         console.log("date : " + dates[0][0]);
+         console.log("Time : " + dates[0][1]);
          console.log("date length: " + dates.length);
             var data = [],
                 shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
@@ -116,9 +120,11 @@ controller("indexController", function($scope, $http){
 
                 for (var j = 0; j < dates.length; j++) {
                     data[i].values.push({
-                        x:  random()//date
-                        , y: random() // time of day
+                        x: new Date(dates[j][0])//date
+                        , y: random()// time of day
+
                     });
+
                 }
             }
             return data;
