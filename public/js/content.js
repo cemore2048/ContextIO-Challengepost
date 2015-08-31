@@ -1,5 +1,4 @@
-angular.module("contextioChallenge",['nvd3']).
-controller("contentController", function($scope, $http){
+contextApp.controller("contentController", function($scope, $http){
 
   var messagesUrl = "/api/messages/";
   var contactsUrl = "/api/contacts/";
@@ -119,7 +118,7 @@ controller("contentController", function($scope, $http){
 
                     data[i].values.push({
                         x:  new Date(dates[j][0]),//date
-                        y: parser. // time of day
+                        y: random() // time of day
                     });
                 }
             }

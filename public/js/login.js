@@ -1,5 +1,4 @@
-angular.module("contextioChallenge",[]).
-controller("indexController", function($scope, $http, $window){
+contextApp.controller("loginController", function($scope, $http, $window){
 
   var addEmailUrl = "/api/add/"
   $scope.authenticate = function(email) {

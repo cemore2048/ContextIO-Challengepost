@@ -73,7 +73,7 @@ router.param('email', function(req, res, next, email){
 router.post('/add', function(req, res){
   var emailAdd = req.body.text;
 
-  ctxioClient.accounts(ID).connect_tokens().post({callback_url: "/content.html", email: emailAdd},
+  ctxioClient.accounts(ID).connect_tokens().post({callback_url: "localhost:8887/content.html", email: emailAdd},
     function(err, response){
       res.set("Content-Type", "application/json");
       res.header("Access-Control-Allow-Origin", "*");
