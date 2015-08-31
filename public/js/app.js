@@ -106,15 +106,13 @@ controller("indexController", function($scope, $http){
 
        var generateData = function(dates) {
           // var f = d3.time.format('%H:%M');
-         console.log("date : " + dates[0][0]);
+         console.log("date : " + dates[0][1]);
          console.log("Time : " + dates[0][1]);
          console.log("date length: " + dates.length);
-            var data = [],
-                shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'],
-                  random = d3.random.normal();
+            var data = [], random = d3.random.normal();
             for (var i = 0; i < 1; i++) {
                 data.push({
-                    key: 'dates ' + i,
+                    key: 'dates ',
                     values: []
                 });
 
