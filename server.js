@@ -6,7 +6,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var router = express.Router();
 
-var ID = "55c575eafe17e8cd1b8b4575";
+var ID = "559acaf250eeb4b6208b4569";
 
 //commmit
 
@@ -20,8 +20,8 @@ var port = process.env.PORT || 8887;
 
 
 var ctxioClient = new ContextIO.Client('2.0', {
-    key: "js9ki9z3",
-    secret: "O9yn28hmhxzBgTnn"
+    key: "77dlwft1",
+    secret: "C43lwCkZjM12MMiF"
 });
 //helper functions
 
@@ -73,7 +73,7 @@ router.param('email', function(req, res, next, email){
 router.post('/add', function(req, res){
   var emailAdd = req.body.text;
 
-  ctxioClient.accounts(ID).connect_tokens().post({callback_url: "localhost:8887/content.html", email: emailAdd},
+  ctxioClient.accounts(ID).connect_tokens().post({callback_url: "https://github.com/ralphie9224", email: emailAdd},
     function(err, response){
       res.set("Content-Type", "application/json");
       res.header("Access-Control-Allow-Origin", "*");
