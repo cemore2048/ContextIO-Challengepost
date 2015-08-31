@@ -5,13 +5,7 @@ contextApp.config(function($routeProvider) {
 
             // route for the login page
             .when('/', {
-                templateUrl : '/login.html',
-                controller  : 'loginController'
+                templateUrl : '/content.html',
+                controller  : 'contentController'
             })
-
-            // route for the content page
-            .when('/content', {
-                templateUrl : 'content.html',
-                controller  : 'contactController'
-            });
 });

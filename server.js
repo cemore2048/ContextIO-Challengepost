@@ -70,19 +70,6 @@ router.param('email', function(req, res, next, email){
 });
 //nconf
 
-router.post('/add', function(req, res){
-  var emailAdd = req.body.text;
-
-  ctxioClient.accounts(ID).connect_tokens().post({callback_url: "localhost:8887/content.html", email: emailAdd},
-    function(err, response){
-      res.set("Content-Type", "application/json");
-      res.header("Access-Control-Allow-Origin", "*");
-
-      res.send(response.body);
-      console.log("this was the post response: " + response.body);
-    });
-});
-
 router.get('/messages/:email', function(request, res){
   res.set("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*");
