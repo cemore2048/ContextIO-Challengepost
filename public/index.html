@@ -12,18 +12,21 @@
 		<script src="bower_components/nvd3/nv.d3.js"></script> <!-- or use another assembly -->
 		<script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
 		<link rel="stylesheet" href="bower_components/nvd3/nv.d3.css">
-
+		<!--  attempt 2-->
+		<script src="http://www.d3plus.org/js/d3.js"></script>
+		<script src="http://www.d3plus.org/js/d3plus.js"></script>
 	<!--  D3 stuff that i am trying-->
 
 </head>
 <body ng-controller="indexController">
 
-		<div class="container-fluid">
+		<!-- <div class="container-fluid">
 			<div ng-app="contextioChallenge">
     		<div ng-controller="indexController">
         	<nvd3 options="options" data="data"></nvd3>
     		</div>
-			</div>
+			</div> -->
+			<div id="viz"></div>
 			<table class="table table-striped table-hover table-bordered" id="contacts">
 				<thead>
 					<tr>
