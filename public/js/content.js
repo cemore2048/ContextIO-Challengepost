@@ -25,13 +25,13 @@ contextApp.controller("contentController", function($scope, $http){
             $scope.total = x.count;
 
             $scope.dates = [];
-
+            $scope.timestamp = [];
             for(var i = 0; i < response.data.length; i++){
               $scope.dates.push(timeFormat(response.data[i].date));
-              $scope.timestamp.push(response.data[i].date));
+              $scope.timestamp.push(response.data[i].date);
               // console.log(response.data[i].date);
             }
-            // $scope.data = generateData($scope.dates);
+            $scope.data = generateData($scope.dates , $scope.timestamp);
           }, function(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -102,7 +102,7 @@ contextApp.controller("contentController", function($scope, $http){
        */
 
 
-       var generateData = function(dates) {
+       var generateData = function(dates, hours) {
          console.log("dates : " + dates[0][0]);
          console.log("dates : " + dates[0][1]);
          console.log("date length: " + dates.length);
