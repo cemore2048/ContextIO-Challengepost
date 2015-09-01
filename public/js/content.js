@@ -28,6 +28,7 @@ contextApp.controller("contentController", function($scope, $http){
 
             for(var i = 0; i < response.data.length; i++){
               $scope.dates.push(timeFormat(response.data[i].date));
+              $scope.timestamp.push(response.data[i].date));
               // console.log(response.data[i].date);
             }
             $scope.data = generateData($scope.dates);

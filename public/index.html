@@ -15,16 +15,18 @@
 		<script src="bower_components/nvd3/nv.d3.js"></script> <!-- or use another assembly -->
 		<script src="bower_components/angular-nvd3/dist/angular-nvd3.js"></script>
 	<!--  D3 stuff that i am trying-->
-
+	<script src="http://d3js.org/d3.v2.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.js"></script>
+	<script src="app.js"></script>
 </head>
 <body ng-app="contextioChallenge">
 
-	<div id="main">
 
+<gh-visualization val="data"></gh-visualization>
         <!-- this is where content will be injected -->
-        <div ng-view></div>
+      
 
-    </div>
+
 	<script src="js/script.js"></script>
 
 	<script src="js/content.js"></script>
