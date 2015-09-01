@@ -12,7 +12,7 @@ contextApp.controller("contentController", function($scope, $http){
 
       }, function(error) {
         // called asynchronously if an error occurs
-        // or server returns response with an error status.
+        // or server returns response with an error status.```
       });
 
 //rafa
@@ -101,7 +101,7 @@ contextApp.controller("contentController", function($scope, $http){
         https://github.com/mbostock/d3/wiki/Time-Formatting
        */
 
-<<<<<<< HEAD:public/js/content.js
+
        var generateData = function(dates) {
          console.log("dates : " + dates[0][0]);
          console.log("dates : " + dates[0][1]);
@@ -126,34 +126,6 @@ contextApp.controller("contentController", function($scope, $http){
             }
             return data;
         }
-=======
-     $scope.generateData = function() {
-         var w = 940,
-          h = 300,
-          pad = 20,
-          left_pad = 100,
-          Data_url = '/data.json';
-
-          var svg = d3.select("#punchcard")
-                      .append("svg")
-                      .attr("width", w)
-                      .attr("height", h);
-
-          var x = d3.scale.linear().domain([0, 23]).range([left_pad, w-pad]),
-              y = d3.scale.linear().domain([0, 6]).range([pad, h-pad*2]);
-
-          svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate(0, "+(h-pad)+")")
-            .call(xAxis);
-
-          svg.append("g")
-            .attr("class", "axis")
-            .attr("transform", "translate("+(left_pad-pad)+", 0)")
-            .call(yAxis);
-       }
->>>>>>> dc782f21d3291eb512b8ad7ce35e70c66d37f0ad:public/js/app.js
-
 
 
 });
